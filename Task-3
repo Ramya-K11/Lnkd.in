@@ -1,0 +1,20 @@
+#Method for converting Fahrenheit to Celsius
+def to_celsius(f):
+    c=(f-32)/1.8
+    print("Temperature in Celsius:",c)
+#Method for converting Celsius to Fahrenheit
+def to_fahrenheit(c):
+    f=(c*1.8)+32
+    print("Temperature in Fahrenheit:",f)
+#Reads temperature as Input from user
+temperature=float(input("Enter the Temperature :"))
+#temperature convertor list
+print("1.Fahrenheit to Celsius Convertor\n2.Celsius to fahrenheit Convertor")
+#Inputs the type of Conversion from user
+op=int(input("Enter your choice :"))
+if op==1:
+    to_celsius(temperature)
+elif op==2:
+    to_fahrenheit(temperature)
+else:
+    print("Invalid Option!!!")
