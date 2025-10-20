@@ -1,0 +1,108 @@
+class Task:
+    #initialize the Task
+    def __init__(self, task_id, title, description):
+        self.id = task_id
+        self.title = title
+        self.description = description
+        self.is_completed = False
+
+    #displays the Task
+    def __str__(self):
+        return (f"ID: {self.id}, Title: {self.title}, "
+                f"Description: {self.description}, Completed: {self.is_completed}")
+
+
+class TaskManager:
+    def __init__(self):
+        self.tasks = []
+        self.next_id = 1
+
+    # Create the Task
+    def create_task(self):
+        title = input("Enter task title: ")
+        description = input("Enter task description: ")
+        task = Task(self.next_id, title, description)
+        self.tasks.append(task)
+        self.next_id += 1
+        print("Task created successfully.")
+
+    # Read the Task Details
+    def view_tasks(self):
+        if not self.tasks:
+            print("No tasks found.")
+            return
+        print("\n--- Task List ---")
+        for task in self.tasks:
+            print(task)
+
+    # Update the existing Task details
+    def update_task(self):
+        try:
+            task_id = int(input("Enter task ID to update: "))
+            task = next((t for t in self.tasks if t.id == task_id), None)
+            if task:
+                new_title = input("Enter new title (leave blank to keep current): ")
+                if new_title:
+                    task.title = new_title
+
+                new_description = input("Enter new description (leave blank to keep current): ")
+                if new_description:
+                    task.description = new_description
+
+                completed_input = input("Is the task completed? (yes/no): ").strip().lower()
+                if completed_input in ["yes", "y"]:
+                    task.is_completed = True
+                elif completed_input in ["no", "n"]:
+                    task.is_completed = False
+
+                print("Task updated successfully.")
+            else:
+                print("Task not found.")
+        #if the entered id is not an integer then this will execute
+        except ValueError:
+            print("Invalid input. Please enter a numeric ID.")
+
+    # Delete the existing task
+    def delete_task(self):
+        try:
+            task_id = int(input("Enter task ID to delete: "))
+            task = next((t for t in self.tasks if t.id == task_id), None)
+            if task:
+                self.tasks.remove(task)
+                print("Task deleted successfully.")
+            else:
+                print("Task not found.")
+        #if the entered id is not an integer then this will execute
+        except ValueError:
+            print("Invalid input. Please enter a numeric ID.")
+
+    # Menu
+    def run(self):
+        while True:
+            print("\n--- Task Manager ---")
+            print("1. Create Task")
+            print("2. View Tasks")
+            print("3. Update Task")
+            print("4. Delete Task")
+            print("5. Exit")
+
+            choice = input("Choose an option: ")
+
+            if choice == "1":
+                self.create_task()
+            elif choice == "2":
+                self.view_tasks()
+            elif choice == "3":
+                self.update_task()
+            elif choice == "4":
+                self.delete_task()
+            elif choice == "5":
+                print("Exiting program...")
+                break
+            else:
+                print("Invalid choice. Try again.")
+
+
+if __name__ == "__main__":
+    manager = TaskManager()
+    manager.run()
