@@ -1,0 +1,105 @@
+#Right angled triangle pattern
+def rightangletriangle():
+    for i in range(0,7):
+        print(' '.join(str(x) for x in range(1,i+1)))
+
+#Inverse Right angled triangle pattern
+def inverserightangle():
+    for i in range(6,0,-1):
+        print(' '.join(str(x) for x in range(1,i+1)))
+
+#Square pattern
+def square():
+    for i in range(6):
+        for j in range(6):
+            if i==0 or i==5 or j==0 or j==5:
+                print(j+1,end=' ')
+            else:
+                print(' ',end=' ')
+        print()
+
+#Pyramid pattern
+def pyramid():
+    for i in range(0,6):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            print(i,end=' ')
+        print()
+
+#Hallow Pyramid pattern
+def hallowpyramid():
+    for i in range(1,6):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            if j==0 or j==2*i-2 or i==5:
+                print(i,end=' ')
+            else:
+                print(' ',end=' ')
+        print()
+
+#Diamond pattern
+def diamond():
+    for i in range(1,6):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            print(i,end=' ')
+        print()
+    for i in range(4,0,-1):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            print(i,end=' ')
+        print()
+
+#Hallow Diamond pattern
+def hallowdiamond():
+    for i in range(1,6):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            if j==0 or j==2*i-2:
+                print(i,end=' ')
+            else:
+                print(' ',end=' ')
+        print()
+    for i in range(4,0,-1):
+        for j in range(6-i):
+            print(' ',end=' ')
+        for j in range(2*i-1):
+            if j==0 or j==2*i-2:
+                print(i,end=' ')
+            else:
+                print(' ',end=' ')
+        print()
+
+#Main Executing Method of Pattern 
+def pattern():
+    while(True):
+        #All types of Patterns list
+        print("1.rightangletriangle\n2.inverserightangle\n3.square\n4.pyramid\n5.hallowpyramid\n6.diamond\n7.hallowdiamond")
+        op=int(input("Enter a option:"))
+        if op==1:
+            rightangletriangle()
+        elif op==2:
+            inverserightangle()
+        elif op==3:
+            square()
+        elif op==4:
+            pyramid()
+        elif op==5:
+            hallowpyramid()
+        elif op==6:
+            diamond()
+        elif op==7:
+            hallowdiamond()
+        else:
+            print("Enter a valid option!!")
+        l=input("Do you want to continue!!")
+        if l=='n':
+            exit()
+
+#Method call
+pattern()
