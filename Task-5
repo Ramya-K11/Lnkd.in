@@ -1,0 +1,82 @@
+import os
+
+# Define Task class
+class Task:
+    def __init__(self, id, title):
+        self.id = id
+        self.title = title
+
+    def __str__(self):
+        return f"{self.id}: {self.title}"
+
+# Load tasks from file
+def load_tasks(filename):
+    tasks = []
+    if os.path.exists(filename):
+        with open(filename, "r") as file:
+            for line in file:
+                parts = line.strip().split(",", 1)
+                if len(parts) == 2:
+                    tasks.append(Task(parts[0], parts[1]))
+    return tasks
+
+# Save tasks to file
+def save_tasks(filename, tasks):
+    with open(filename, "w") as file:
+        for task in tasks:
+            file.write(f"{task.id},{task.title}\n")
+
+# CRUD functions
+def add_task(tasks):
+    id = input("Enter task ID: ")
+    title = input("Enter task title: ")
+    tasks.append(Task(id, title))
+
+def view_tasks(tasks):
+    for task in tasks:
+        print(task)
+
+def update_task(tasks):
+    id = input("Enter task ID to update: ")
+    for task in tasks:
+        if task.id == id:
+            task.title = input("Enter new title: ")
+            print("Task updated.")
+            return
+    print("Task not found.")
+
+def delete_task(tasks):
+    id = input("Enter task ID to delete: ")
+    for task in tasks:
+        if task.id == id:
+            tasks.remove(task)
+            print("Task deleted.")
+            return
+    print("Task not found.")
+
+# Main program loop
+def main():
+    filename = "tasks.txt"
+    tasks = load_tasks(filename)
+
+    while True:
+        print("\n1. Add Task\n2. View Tasks\n3. Update Task\n4. Delete Task\n5. Save & Exit")
+        choice = input("Choose an option: ")
+
+        if choice == "1":
+            add_task(tasks)
+        elif choice == "2":
+            view_tasks(tasks)
+        elif choice == "3":
+            update_task(tasks)
+        elif choice == "4":
+            delete_task(tasks)
+        elif choice == "5":
+            save_tasks(filename, tasks)
+            print("Tasks saved. Exiting...")
+            break
+        else:
+            print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
